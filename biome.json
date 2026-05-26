@@ -30,5 +30,17 @@
       "quoteStyle": "single",
       "semicolons": "asNeeded"
     }
+  },
+  "files": {
+    "includes": [
+      "**",
+      "!!**/mode_modules",
+      "!!**/.git",
+      "!!**/dist",
+      "!!**/build",
+      "!!**/out",
+      "!!**/.next",
+      "!!**/.turbo"
+    ]
   }
 }
