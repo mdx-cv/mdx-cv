@@ -1,0 +1,95 @@
+/* @layer components {
+  .editor-shell {
+    display: flex;
+    min-height: 100%;
+    flex-direction: column;
+  }
+
+  .editor-shell .mdxeditor-root-contenteditable {
+    flex: 1;
+    min-height: 0;
+  }
+
+  .editor-content {
+    min-height: 100%;
+    padding: 1rem 1.25rem;
+    color: rgb(15 23 42);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    background: white;
+  }
+
+  .editor-content :where(h1, h2, h3, h4, h5, h6, p, ul, ol, blockquote, pre, table) {
+    margin: 0 0 1rem;
+  }
+
+  .editor-content :where(h1) {
+    font-size: 2rem;
+    line-height: 1.15;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+  }
+
+  .editor-content :where(h2) {
+    font-size: 1.5rem;
+    line-height: 1.2;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  .editor-content :where(h3) {
+    font-size: 1.25rem;
+    line-height: 1.25;
+    font-weight: 600;
+  }
+
+  .editor-content :where(p) {
+    min-height: 1.5em;
+  }
+
+  .editor-content :where(ul, ol) {
+    padding-left: 1.5rem;
+  }
+
+  .editor-content :where(li + li) {
+    margin-top: 0.25rem;
+  }
+
+  .editor-content :where(blockquote) {
+    padding-left: 1rem;
+    border-left: 3px solid rgb(148 163 184);
+    color: rgb(71 85 105);
+  }
+
+  .editor-content :where(code) {
+    border-radius: 0.375rem;
+    background: rgb(241 245 249);
+    padding: 0.125rem 0.375rem;
+    font-size: 0.9em;
+  }
+
+  .editor-content :where(pre) {
+    overflow-x: auto;
+    border-radius: 0.75rem;
+    background: rgb(15 23 42);
+    padding: 1rem;
+    color: rgb(226 232 240);
+  }
+
+  .editor-content :where(pre code) {
+    background: transparent;
+    padding: 0;
+    color: inherit;
+  }
+
+  .editor-content :where(hr) {
+    border-color: rgb(226 232 240);
+    margin-block: 1.5rem;
+  }
+
+  .editor-content :where(a) {
+    color: rgb(14 116 144);
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+  }
+} */
