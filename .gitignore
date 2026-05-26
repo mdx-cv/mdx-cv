@@ -8,6 +8,8 @@
 # Programming Language & Package Manager
 node_modules
 
+*.log
+
 # Outputs
 dist
 output/
