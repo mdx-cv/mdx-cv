@@ -1,7 +1,9 @@
+import { pdf } from '@react-pdf/renderer'
+import { ElementMap } from '../../elements/index.js'
 import { loadJsx } from './load-jsx.js'
 import { mdxToJsx } from './mdx-to-jsx.js'
 import { renderMdxToPdf } from './mdx-to-pdf.js'
-import type { WrapProps } from './Wrap.js'
+import { Wrap, type WrapProps } from './Wrap.js'
 
 export type RendererOptions = Omit<WrapProps, 'children'> & {
   debugfile?: boolean
@@ -27,6 +29,24 @@ export class Renderer implements IRenderer {
     }
     const MDXComponent = await loadJsx(jsx, this.baseUrl)
     return renderMdxToPdf(MDXComponent, { ...this.options, baseUrl: this.baseUrl })
+  }
+
+  async renderToBlob(): Promise<Blob> {
+    const jsx = await mdxToJsx(this.mdx)
+    const MDXComponent = await loadJsx(jsx, this.baseUrl)
+    const props = {
+      lang: this.options.lang,
+      pageSize: this.options.pageSize,
+      baseUrl: this.options.baseUrl,
+      components: ElementMap,
+    }
+    const Doc = (
+      <Wrap {...props}>
+        <MDXComponent />
+      </Wrap>
+    )
+    const blob = await pdf(Doc).toBlob()
+    return blob
   }
 }
 

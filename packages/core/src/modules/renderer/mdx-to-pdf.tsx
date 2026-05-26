@@ -3,23 +3,28 @@ import { renderToStream } from '@react-pdf/renderer'
 import { ElementMap } from '../../elements/index.js'
 import { Wrap, type WrapProps } from './Wrap.js'
 
-type PDFRenderOptions = Omit<WrapProps, 'children'>
-export async function renderMdxToPdf(
-  MDXComponent: React.ComponentType<Record<string, never>>,
-  options: PDFRenderOptions,
-) {
+export interface DocumentProps {
+  MDXComponent: React.ComponentType<Record<string, never>>
+  options: PDFRenderOptions
+}
+export function Document({ MDXComponent, options }: DocumentProps) {
   const props = {
     lang: options.lang,
     pageSize: options.pageSize,
     baseUrl: options.baseUrl,
     components: ElementMap,
   }
-
-  const PDF = () => (
+  return (
     <Wrap {...props}>
       <MDXComponent />
     </Wrap>
   )
+}
 
-  return await renderToStream(<PDF />)
+type PDFRenderOptions = Omit<WrapProps, 'children'>
+export async function renderMdxToPdf(
+  MDXComponent: React.ComponentType<Record<string, never>>,
+  options: PDFRenderOptions,
+) {
+  return await renderToStream(<Document MDXComponent={MDXComponent} options={options} />)
 }

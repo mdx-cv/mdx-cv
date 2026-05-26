@@ -1,5 +1,4 @@
 /* @jsxRuntime automatic */
-import { fileURLToPath } from 'node:url'
 import { Image, StyleSheet } from '@react-pdf/renderer'
 import { markAsBlock, useMdxBaseUrl } from './utils.js'
 
@@ -32,14 +31,27 @@ function resolveImageSrc(src: string, baseUrl: URL | null): string {
   if (!src || src.startsWith('http') || src.startsWith('data:')) {
     return src
   }
+
+  const isBrowser = 'window' in globalThis
+
   // file:// URL → convert to absolute POSIX path (react-pdf doesn't accept file:// scheme)
   if (src.startsWith('file:')) {
-    return fileURLToPath(src)
+    return isBrowser ? src : fileUrlToPath(src)
   }
   // Relative path: resolve against the MDX file's directory, then convert to absolute path
   if (baseUrl) {
     const resolved = new URL(src, new URL('.', baseUrl))
-    return fileURLToPath(resolved)
+    return isBrowser ? resolved.href : fileUrlToPath(resolved.href)
   }
   return src
+}
+
+function fileUrlToPath(fileUrl: string): string {
+  const parsed = new URL(fileUrl)
+  if (parsed.protocol !== 'file:') {
+    return fileUrl
+  }
+
+  const pathname = decodeURIComponent(parsed.pathname)
+  return pathname.startsWith('/') ? pathname : `/${pathname}`
 }
